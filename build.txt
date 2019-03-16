@@ -1,5 +1,5 @@
 author = TUA Team
-version = 2.0
+version = 2.0.1
 displayName = Potion Seller Reborn
 homepage = https://github.com/TUA-Team/PotionSellerReborn
 includeSource = true
