@@ -1,0 +1,4 @@
+This mod adds a Potion Seller Town NPC. Simple as that.
+
+Based on Potion Seller by gamagamer64 and Phupperbrimmy.
+Code used with permission.

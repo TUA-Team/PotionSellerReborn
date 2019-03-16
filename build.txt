@@ -1,0 +1,11 @@
+author = TUA Team, gamagamer64 and Phupperbrimmy
+version = 2.0
+displayName = Potion Seller Reborn
+homepage = https://forums.terraria.org/index.php?threads/wip-the-potion-seller-mod.69089/
+noCompile = false
+hideCode = false
+hideResources = false
+includeSource = true
+includePDB = true
+languageVersion = 6
+side = Both
