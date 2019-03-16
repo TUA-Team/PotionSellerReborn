@@ -9,6 +9,8 @@ namespace PotionSellerReborn
 	// ReSharper disable once UnusedMember.Global
 	internal class PotionSellerMod : Mod
 	{
+	    internal static Mod CalamityInstance;
+
 		public override void PostSetupContent()
 		{
 			// Do this in PostSetupContent to ensure other mods are already loaded
@@ -19,8 +21,30 @@ namespace PotionSellerReborn
 		{
 			InitVanillaShop();
 
-			if (ModLoader.GetLoadedMods().Contains("CalamityMod"))
-				InitCalamityShop();
+		    if (ModLoader.Mods.Any(i => i.Name == "CalamityMod"))
+		    {
+		        CalamityInstance = ModLoader.Mods.Single(i => i.Name == "CalamityMod");
+                InitCalamityShop();
+            }
+
+		    List<Mod> modWithPotion = ModLoader.Mods.Where(i => i.GetInternalItemList().Any(j => j.item.potion)).ToList();
+
+		    foreach (var mod in modWithPotion)
+		    {
+		        if (mod.Name == "CalamityMod" || mod.Name == "TUA")
+		        {
+		            continue;
+                }
+
+		        List<ShopItem> modShopItems = new List<ShopItem>();
+		        List<ModItem> potions = mod.GetInternalItemList().Where(i => i.item.potion).ToList();
+
+		        foreach (var potion in potions)
+		        {
+		            modShopItems.Add(new ShopItem(potion.item.type, new Currency((int) (10000 + potion.item.value * 1.5f)), IsHardMode));
+		        }
+                ShopManager.AddShop(mod.Name, mod.DisplayName + " Shop", modShopItems);
+		    }
 		}
 
 		bool IsHardMode() => Main.hardMode;
